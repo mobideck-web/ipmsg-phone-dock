@@ -1,0 +1,12 @@
+PASS Native CF_HDROP preserves Unicode and zero-byte file
+PASS Repeated local path appears only once
+PASS Missing local copy is rejected before starting OLE
+PASS UNC paths are rejected without probing a share
+PASS Pre-cancelled and empty drags return without creating a window
+PASS Legacy deferred drag refuses without invoking the downloader
+PASS Large sparse file exports only a small path descriptor
+PASS Concurrent preparation is single-flight; waiter cancellation is isolated
+PASS Owner cancellation removes its flight and allows a clean retry
+PASS Locally edited prepared copies are invalidated
+PASS Windows export names retain extensions and reject reserved leaf names
+RESULT: 11 passed; 0 failed. No windows, Explorer sessions, network or phone were used.

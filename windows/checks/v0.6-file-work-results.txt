@@ -1,0 +1,6 @@
+PASS: Completed file work returns without creating a window
+PASS: File errors retain their actionable cause
+PASS: Cancelling a stalled destination releases the caller promptly without pretending native I/O has stopped
+PASS: A cancelled caller retains the actual worker's cache lease until native I/O finishes
+PASS: The finished worker releases its lease and permits later cache expiry
+RESULT: 5 file-work cancellation checks passed. No phone, desktop UI or real blocked network share.

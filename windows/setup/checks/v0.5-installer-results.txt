@@ -1,0 +1,58 @@
+PASS ordinary payload paths
+PASS reject path ../escape
+PASS reject path /escape
+PASS reject path C:/escape
+PASS reject path a\escape
+PASS reject path a//b
+PASS reject path a/../b
+PASS reject path a/./b
+PASS reject path a./b
+PASS reject path a /b
+PASS reject path NUL.txt
+PASS reject path com1.exe
+PASS reject path lpt².txt
+PASS reject path a:b
+PASS reject path a?b
+PASS reject path .ipmsgdock-install.tsv
+PASS reject drive root
+PASS verified extraction
+PASS reject occupied staging directory
+PASS reject changed SHA-256
+PASS reject missing file
+PASS reject ZIP traversal
+PASS reject case duplicate
+PASS reject unlisted file
+PASS reject ZIP symbolic link
+PASS reject receipt traversal
+PASS fresh install
+PASS owned-file receipt written
+PASS upgrade replaces verified owned files
+PASS upgrade preserves untracked files
+PASS integration failure triggers rollback
+PASS rollback restores original application
+PASS rollback restores receipt
+PASS upgrade rejects modified owned file
+PASS modified owned file preserved
+PASS upgrade rejects unowned collision
+PASS collision preserves unrelated content
+PASS locked application fails before overwrite
+PASS locked upgrade leaves install intact
+PASS reject unrecognized installation folder
+PASS uninstall removes unchanged tracked app
+PASS uninstall preserves changed tracked file
+PASS uninstall preserves unrelated file
+PASS install and uninstall preserve separate private state
+PASS cleanup only deletes tracked file names
+PASS reject directory junction
+PASS COM creates shortcut only in fixture directory
+PASS shortcut target matches fixture executable
+PASS shortcut has no competing global hotkey
+PASS atomic shortcut creation
+PASS atomic shortcut replacement
+PASS uninstall rejects arbitrary shortcut path before registry access
+PASS unrelated fixture shortcut preserved
+PASS sign-in startup defaults off
+PASS startup command quotes executable and requests background mode
+PASS concurrent setup operation rejected
+PASS: 56 installer safety checks. Fixtures: <workspace>\work\dock-setup-checks-38a3077a985740ad9bcada8646940168
+Checks used isolated workspace fixtures. No installed application, user registry, Start menu, Desktop, or private app state was changed.

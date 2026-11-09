@@ -1,0 +1,9 @@
+PASS: Complete welcome component repaint is stable
+PASS: Connection controls retain native keyboard and accessibility roles
+PASS: Native ListView row metrics reserve the full 150% DPI card height
+PASS: Readiness is explicit for each file
+PASS: A failed source cannot appear ready
+PASS: File cards preserve native multi-selection and full-row keyboard navigation
+PASS: Clearing the shelf removes stale readiness
+PASS: Fixtures create no application forms or visible windows
+RESULT: 8 component checks passed. PNG fixtures saved to <workspace>\outputs\IPMsgDock\checks\evidence\v0.6-presentation. No desktop capture or phone session.

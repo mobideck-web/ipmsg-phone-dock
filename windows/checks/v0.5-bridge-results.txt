@@ -1,0 +1,50 @@
+Compiled IPMsgDock.exe. No tests or device sessions were run.
+PASS 1: Invalid bearer/port rejected before networking
+PASS 2: Strict status schema parses and every request carries explicit bearer authentication
+PASS 3: Duplicate keys, negative sizes, path-like IDs, floating version and trailing JSON rejected
+PASS 4: Oversized item list rejected
+PASS 5: Redirect is rejected without forwarding bearer credentials
+PASS 6: Oversized thumbnail rejected before decoding
+PASS 7: Huge dimensions and truncated JPEG markers rejected safely
+PASS 8: Bounded thumbnail JPEG header accepted
+PASS 9: Only a verified complete file is published
+PASS 10: Empty shared file completes correctly
+PASS 11: Wrong Content-Length and premature EOF never leave a published file or partial
+PASS 12: Cancellation aborts a stalled socket promptly and removes its private partial
+PASS 13: Same-session immutable item/version reuses the completed lease without another transfer
+PASS 14: Locally changed cached bytes invalidate readiness and fetch a new private copy
+PASS 15: Broker XML rejects DTD/external entities
+PASS 16: COM QueryInterface exposes the actual async-drop capability GUID
+PASS 17: Native FILEGROUPDESCRIPTOR is immediate and contains metadata without waiting for bytes
+PASS 18: Synchronous target is refused immediately while originals are still transferring
+PASS 19: Target can explicitly begin an asynchronous operation
+PASS 20: Async GetData returns an IStream immediately, without executing a download or wait
+PASS 21: Pending stream never waits on the source COM apartment
+PASS 22: A pending worker does not hold the position lock needed by source seek/clone
+PASS 23: Negotiated worker reads the completed original after asynchronous preparation
+PASS 24: Cloned stream has independent position and exact known size
+PASS 25: Async completion is tracked until receiver EndOperation
+PASS 26: Refused synchronous target still offers ready retry when no drop occurred
+PASS 27: Target's synchronous pending-file preflight sets the retry flag before async negotiation
+PASS 28: Successful async drop with prior preflight retry waits for receiver EndOperation and its destination write
+PASS 29: Native COM-marshaled async target reads after delayed preparation while broker pumps its source apartment
+PASS 30: Native receiver EndOperation reports a failed extraction while source bytes remain pending
+PASS 31: Receiver failure cancels preparation promptly instead of waiting for stalled source bytes
+PASS 32: Failed source interrupts missing receiver EndOperation even while another source is stalled
+PASS 33: Cancelled source interrupts missing receiver EndOperation even while another source is stalled
+PASS 34: A fully prepared selection offers standard CF_HDROP first while preserving virtual file formats
+PASS 35: Native Shell CF_HDROP decoding preserves Unicode paths and includes a ready zero-byte original
+PASS 36: A selection with any pending original never advertises or accepts CF_HDROP
+PASS 37: Completing downloads during a drag does not change its initial CF_HDROP format snapshot
+PASS 38: Compiled GUI executable is available for real subprocess checks
+PASS 39: Real WinExe accepts UTF-8 request/cache paths over redirected stdin and returns XML without downloading after mouse release (1206ms)
+PASS 40: Repeated GUI broker startup 1 completes with stdin held open
+PASS 41: Repeated GUI broker startup 2 completes with stdin held open
+PASS 42: Repeated GUI broker startup 3 completes with stdin held open
+PASS 43: Repeated GUI broker startup 4 completes with stdin held open
+PASS 44: Malformed request returns a bounded failure XML instead of closing the parent's write pipe
+PASS 45: Invalid UTF-8 is rejected by the actual GUI broker
+PASS 46: Parent EOF before request exits promptly without networking
+PASS 47: Pre-cancelled parent request never starts a drag or download
+PASS 48: Parent cancellation terminates a helper that never reads its full initial stdin pipe (187ms)
+RESULT: 48 bridge checks passed. Real WinExe startup, loopback fixtures and COM media only; no phone, window, mouse drag or Explorer used.

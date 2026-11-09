@@ -1,0 +1,32 @@
+PASS: Active sessions are protected even after the grace interval
+PASS: An in-flight preparation or native handoff stays protected after retirement
+PASS: Finishing the final use starts a complete one-hour grace period
+PASS: An expired retired session is removed while the app can still run
+PASS: A recent source handoff extends retention
+PASS: A later startup prune also clears the retired source
+PASS: A long selected name uses the same safe Windows path budget as the downloader
+PASS: Long-name sources and registered incomplete downloads are reclaimed after grace
+PASS: TryBeginUse acquires an active lease without writing a marker and rejects retired sessions
+PASS: TryBeginUse refuses a contended cache gate immediately instead of waiting for preparation disk I/O
+PASS: An active owner in another process is protected by the Windows file lock
+PASS: An abandoned session is first retired with a fresh grace period
+PASS: An interrupted owner cannot cause immediate cleanup on the next launch
+PASS: An abandoned process's expired sources are reclaimed on a later prune
+PASS: Locked sources and unknown files survive a partial prune
+PASS: A later prune retries the locked source and preserves untracked content
+PASS: Empty tracked directories are retried without reading or removing other state keys
+PASS: Unknown directories and unmarked arbitrary GUID directories are not claimed
+PASS: Traversal in an ownership marker invalidates it without deleting any source or destination
+PASS: Absolute destination paths cannot be accepted as owned files
+PASS: Pruning never traverses a junction in an owned source tree
+PASS: Session creation refuses a reparse-point state ancestor
+PASS: Removing a foreign junction lets a later prune finish safely
+PASS: Saving a marker never truncates a preexisting pending-name hard link or its outside target
+PASS: Atomic replacement of an existing marker hard link changes only the cache directory entry
+PASS: Pruning recognizes owned crash-left markers, preserves unknown pending files, and leaves hard-link destinations intact
+PASS: A later prune removes the remaining owned session while outside hard-link targets survive
+PASS: A wholly recognized legacy cache is marked and receives a fresh grace period
+PASS: Legacy migration never deletes sources immediately
+PASS: An expired recognized legacy cache is reclaimed
+PASS: Legacy-shaped files without matching leases remain unclaimed
+RESULT: 31 temporary-cache safety checks passed. Isolated fixture files only; no phone, UI, drag or live state accessed.

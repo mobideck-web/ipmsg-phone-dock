@@ -1,0 +1,7 @@
+PASS: Actual QR bitmap independently decodes to the exact Android ADB pairing payload
+PASS: Pairing payload rejects injected service delimiters
+PASS: Pairing payload rejects malformed secrets
+PASS: The embedded offline Lucide font loads without a font installation
+PASS: Hover bar stays directly below its icon inside a right-pinned dock
+PASS: Ten vector icons render distinctly and repeated repaint does not accumulate pixels
+RESULT: 6 checks passed; isolated QR and drawing fixtures only. No phone, pairing, visible UI or gaming measurement.

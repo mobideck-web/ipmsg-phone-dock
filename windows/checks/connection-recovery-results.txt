@@ -1,0 +1,19 @@
+PASS 1: stale offline Wi-Fi transport resolves to the same authorized phone over USB without reconnecting
+PASS 2: alternate transport retains approval only through its matching stable identity
+PASS 3: resolved phone pins its verified identity so the UI can reject an endpoint changing before final connection
+PASS 4: an unauthorized stale transport does not block an already-authorized same-phone transport
+PASS 5: a stale ready transport whose identity command fails can recover through a verified same-phone alternate
+PASS 6: offline remembered phone never falls back to an unrelated authorized phone
+PASS 7: an unknown selected offline transport cannot borrow another phone's identity
+PASS 8: reused address with a different identity fails closed before reconnect or fallback
+PASS 9: changed Wi-Fi address reconnects only the remembered phone's discovery identity
+PASS 10: only the stale offline remembered Wi-Fi endpoint is disconnected before a bounded reconnect
+PASS 11: missing owner authorization remains actionable and never resets USB approval
+PASS 12: first use verifies a single ready phone before the separate connection approval step
+PASS 13: multiple unselected phones require explicit choice without probing identities
+PASS 14: cancelling discovery settles promptly without blocking process cleanup
+PASS 15: truncated ADB listing is rejected before selecting or reconnecting a phone
+PASS 16: conflicting duplicate transport states cannot select a phone
+PASS 17: transport enumeration is bounded before identity work
+PASS 18: malformed stored identity cannot carry a trusted approval
+PASS: 18 focused connection recovery checks; no real phones or network used.

@@ -1,0 +1,24 @@
+# Harsh source review — 0.7.0 preview
+
+Folder drag and stale-phone recovery are implemented and exercised with generated local fixtures. This is a source and component review, not an independent penetration test. Findings below include remaining release acceptance and limits.
+
+## Fixed in this update
+
+- **Stale transport produced a false offline error.** Resolve previously stopped when the selected ADB serial appeared offline, before checking another transport for the same remembered identity. Resolution now examines ready transports against the expected identity, reconnects only a remembered endpoint within a 45-second bound, and rejects transport listings that are truncated, duplicated or too large. The UI keeps the requested phone selected instead of defaulting to an unrelated first row. Identity is checked again immediately before starting the screen session. Eighteen fake-ADB tests include USB/Wi-Fi alternatives, address changes/reuse, cancellation, duplicate listings and malformed preferences. The physical screenshot case remains unverified.
+- **Folder extraction is a security boundary.** Only a system folder-tree export receives the reserved folder MIME. Other selected files advertising that MIME are normalized to ordinary ZIP files. Android snapshots one selected tree, with entry/depth/size/time/storage limits and change checks. Windows bounds ZIP central-directory count/size before allocating it, rejects traversal, links, collisions and unrepresentable paths, writes into a private temporary cache and journals exact owned paths. Actual folder drops use ordinary Windows FileDrop. Thirty-nine extraction, saving, ZIP64, collisions, cleanup, and CF_HDROP fixtures passed; 38 loopback-preparation fixtures passed, including revocation and ordinary ZIP behavior.
+- **Delayed drag acknowledgement could cancel a newer gesture.** Android requires matching gesture ID and revision; absent or stale versions do nothing. The dock captures the observed version before dispatch. The Android protocol tests cover missing, malformed and stale acknowledgements.
+- **Revocation could race with item insertion.** Android rechecks session owner and access inside the insertion transaction. File sharing stops when that owner is revoked.
+- **Legacy drag paths obscured the supported design.** The custom COM broker, its process entry point, and unused prepared phone-file browser were moved out of the production build into `checks/legacy`. The main thread exposes only already-complete local paths. Historical broker fixtures are kept for reference.
+
+## Remaining limits
+
+- Phone folder snapshots use level-0 ZIP to avoid expensive recompression. The phone stores the snapshot before Windows downloads and extracts it. A 32 GiB archive and expanded-data bound, 10,000 descendants, depth 32, a 10-minute snapshot deadline and 32 MiB reserve apply. Known-size selections receive a free-space preflight. Unknown-size providers are checked as they stream, so insufficient storage can still leave a cleaned partial attempt. Provider change checks catch common mutations but cannot prove a provider’s source content is immutable or authentic.
+- The exact documented path and component checks can reject otherwise legal phone names or deep trees. No unsafe entry is silently omitted. Safely representing a folder means both devices need these updated versions; old Windows builds treat a folder archive as an ordinary ZIP.
+- Killing Windows during a chosen-destination folder save can leave a hidden `.ipmsg-folder-<id>.part` folder in that destination. Automatic cleanup is restricted to the private application cache to avoid deleting unrelated user data. The guide explains manual recovery.
+- The folder is built on the phone and then downloaded to a PC snapshot before the drag is enabled. This adds waiting and disk I/O for large trees. Cross-process resume and streaming of incomplete folders are not provided.
+- The Android release cannot be delivered as an installable update until the existing owner signing key/lineage is used. No replacement key is appropriate. The owner helper is prepared after the final APK build.
+- USB/Wi-Fi recovery fixtures do not establish real handset or hotspot reliability. Physical Android provider grants, screen-off behavior, and actual Explorer drops remain pending. No throughput, latency, or “zero lag” claim is made.
+
+## Current local validation
+
+Windows focused component suites: 160 passing checks across real generated local folder archives/CF_HDROP, loopback preparation, cache ownership, stale identity/process resolution, asynchronous cancellation, presentation, and native drag data. Android host JVM build/test suite and shrunk release compilation are still being completed and reported separately. No actual physical phone/Explorer drop is counted.

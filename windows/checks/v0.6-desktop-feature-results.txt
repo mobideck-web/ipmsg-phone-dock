@@ -1,0 +1,38 @@
+PASS: Visible enabled dock is eligible for its AppBar reservation
+PASS: Disabled reservation leaves the work area untouched
+PASS: Fullscreen/collapse suspension releases eligibility
+PASS: Hidden windows are not eligible
+PASS: Minimized windows are not eligible
+PASS: Right-edge geometry supports a monitor with negative coordinates
+PASS: Oversized reservation is clamped within its selected monitor
+PASS: Unavailable monitor geometry is rejected
+PASS: Personal shortcut parsing normalizes modifier order and casing
+PASS: Personal shortcut parsing accepts supported function keys and Windows modifier
+PASS: Digit shortcuts use the correct virtual key
+PASS: Malformed or typing-interfering shortcut rejected: I
+PASS: Malformed or typing-interfering shortcut rejected: Shift+I
+PASS: Malformed or typing-interfering shortcut rejected: Ctrl+Ctrl+I
+PASS: Malformed or typing-interfering shortcut rejected: Ctrl+Alt
+PASS: Malformed or typing-interfering shortcut rejected: Ctrl+Alt+I+J
+PASS: Malformed or typing-interfering shortcut rejected: Ctrl+73
+PASS: Malformed or typing-interfering shortcut rejected: Ctrl+Alt+0x49
+PASS: Malformed or typing-interfering shortcut rejected: Ctrl+LControlKey
+PASS: Initial global shortcut registers through the owned registration boundary
+PASS: Conflicting replacement keeps the previous global shortcut active
+PASS: Successful replacement registers a different id before releasing the previous binding
+PASS: Unchanged shortcut does not register a duplicate binding
+PASS: Disabling the shortcut unregisters the owned active binding
+PASS: Repeated shortcut cleanup is harmless
+PASS: A preference write failure propagates for the settings dialog
+PASS: Failed preference save unregisters only the candidate and preserves the previous shortcut
+PASS: A failed disable preference save is reported
+PASS: Failed disable save preserves the enabled shortcut
+PASS: Previous shortcut remains registered throughout successful settings persistence
+PASS: Generated phone-format PNG decodes with its dimensions and pixel content intact
+PASS: Non-PNG output is rejected before decoding
+PASS: A missing PNG completion marker is rejected
+PASS: Decompression-bomb dimensions are rejected before image allocation
+PASS: Per-window transparency can be disabled without creating a window
+PASS: Transparency preference can be restored without creating a window
+PASS: Screenshot clipboard helper rejects a worker thread before touching the clipboard
+RESULT: 37 desktop feature fixture checks passed. No real AppBar, hotkey, shortcut, clipboard write, phone capture or visible window.

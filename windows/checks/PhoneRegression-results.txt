@@ -1,0 +1,22 @@
+Physical backend validation on a connected Android phone; isolated ADB 5041; generated files only.
+Temporary phone folder: a newly generated dock-regression folder in Downloads/IPMsg.
+PASS 1: Authorized device responds on the existing isolated connection
+PASS 2: Upload complete: empty.bin, 0 bytes (observed 1100 ms)
+PASS 3: Upload complete: IPMsg-é-测试-عربي.txt, 69 bytes (observed 940 ms)
+PASS 4: Upload complete: generated-32MiB.bin, 33554432 bytes (observed 2156 ms)
+PASS 5: Upload complete: IPMsg-é-测试-عربي.txt, 69 bytes (observed 1009 ms)
+PASS 6: Duplicate upload publishes a different name without replacing the original
+PASS 7: Only the four generated complete files are listed
+PASS 8: Empty file round trip is complete and byte-identical
+PASS 9: Unicode filename and Unicode file bytes survive the round trip
+PASS 10: Original and uniquely named duplicate retain the same generated contents
+PASS 11: 32 MiB generated file downloads byte-identically (observed 1509 ms; not a benchmark)
+PASS 12: Completed large copy is marked ready in the preparation cache
+PASS 13: Repeat preparation reuses that same local copy (observed 1 ms)
+PASS 14: A generated phone source changed after listing is refused with a refresh instruction
+PASS 15: Upload complete: generated-50MiB-cancel.bin, 52428800 bytes (observed 2853 ms)
+PASS 16: Preparation cancellation interrupts a real 50 MiB phone pull after local bytes arrive (390 ms total)
+PASS 17: Cancelled pull leaves no local partial file
+PASS 18: Cancellation preserves the complete phone source and exposes no upload partials
+CLEANUP PASS: exact canonical generated phone folder removed; no personal files accessed.
+PASS: 18 physical backend checks. No GUI or OLE interaction tested.

@@ -1,0 +1,14 @@
+15 desktop feature fixture checks passed.
+
+Coverage:
+- Reservation eligibility: enabled, disabled, fullscreen/collapse suspension, hidden, minimized.
+- Right-edge geometry: negative-coordinate monitor, oversized width, invalid monitor.
+- Generated PNG: original dimensions/pixel preserved, wrong signature rejected,
+  missing completion marker rejected, oversized decoded dimensions rejected.
+- Per-Form glass preference: disable/restore without native window creation.
+- Clipboard entry point: worker-thread invocation rejected before any clipboard write.
+
+Full Windows source compilation also passed after integration with the six-row UI
+and bridge components. No actual AppBar registration, global hotkey registration,
+desktop shortcut, clipboard write, phone screenshot capture or visible window was
+used by these fixture checks. They do not establish full desktop/phone acceptance.

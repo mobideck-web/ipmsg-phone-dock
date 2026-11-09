@@ -1,0 +1,15 @@
+layout e12f
+full e115
+top e4f3
+pin e258
+collapse e436
+sound e1aa
+mute e1ab
+display e166
+plus e140
+minus e11f
+more e0ba
+close e1b1
+back e072
+home e07a
+camera e068

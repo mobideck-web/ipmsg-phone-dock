@@ -1,0 +1,24 @@
+PASS 1: inherited pipe returns a bounded, explicitly incomplete snapshot (523ms)
+parent-finishedPASS 2: ADB proxy returns despite a descendant retaining its stderr pipe (2218ms)
+PASS 3: simultaneous stdout/stderr above pipe capacity drains without deadlock and remains bounded
+PASS 4: hung adb obeys its deadline (393ms)
+PASS 5: hung adb cancellation finishes without blocking disposal (277ms)
+PASS 6: prepare is single-flight; cancelling a second waiter preserves the first download and ready copy
+PASS 7: prepare returns promptly on an unpumped UI context; cancellation removes its partial (entry 0ms)
+PASS 8: cancelled preparation can be explicitly retried with the same selected file
+PASS 9: download deadline is enforced and its owned partial is cleaned
+PASS 10: changed selected file is rejected before a copy begins
+PASS: 10 focused backend regressions
+PASS Native CF_HDROP preserves Unicode and zero-byte file
+PASS Repeated local path appears only once
+PASS Missing local copy is rejected before starting OLE
+PASS UNC paths are rejected without probing a share
+PASS Pre-cancelled and empty drags return without creating a window
+PASS Legacy deferred drag refuses without invoking the downloader
+PASS Large sparse file exports only a small path descriptor
+PASS Concurrent preparation is single-flight; waiter cancellation is isolated
+PASS Owner cancellation removes its flight and allows a clean retry
+PASS Locally edited prepared copies are invalidated
+PASS Windows export names retain extensions and reject reserved leaf names
+RESULT: 11 passed; 0 failed. No windows, Explorer sessions, network or phone were used.
+Selected headless checks passed. No real ADB runtime, phone, application window or Explorer interaction was used.

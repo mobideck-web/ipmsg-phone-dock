@@ -1,0 +1,8 @@
+PASS: Owner-drawn translucent button clears inherited Opaque style
+PASS: Repeated normal paints do not accumulate icon/text or translucent fill
+PASS: Hover changes the actual painted button
+PASS: Leaving hover restores the original clean pixels
+PASS: Changing the icon clears the previous glyph before drawing once
+PASS: Parent-background changes repaint cleanly without old pixels
+PASS: Component checks show no windows or application forms
+RESULT: 7 component repaint checks passed. No visible windows, screenshots, app sessions or phone access.

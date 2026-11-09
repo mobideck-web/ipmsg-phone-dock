@@ -1,0 +1,126 @@
+# IPMsg Android 0.8.1 RC1 (version code 15)
+
+Android 10+, same application ID `app.lantern.lan`. This update adds owner-selected folder sharing to Windows Phone Dock and keeps chat, history and camera data for in-place upgrades. Release APK signing must use the existing private key and verified lineage; the local unsigned build is not an installable update. See `DOCK-FOLDERS.md` and `TESTING.md`.
+
+# Previous Android 0.8.0 documentation
+
+Android 10+, application app.lantern.lan, code 14. This update adds the owner-approved Phone Dock file companion; existing IPMsg chat, camera, identities, storage/history and application ID remain. Install only the signed release APK using the existing signing lineage over the installed app; do not uninstall to update.
+
+## Phone Dock
+
+Use IPMsg Phone Dock 0.4 on Windows. Connect the authorized phone, open Files & photos and approve a temporary session on the phone. Add files/photos with Android's picker. Only those selections are registered; the app does not expose an arbitrary file/URI/path API. Hold an IPMsg file card in the mirror and move the held pointer out to Windows, or drag its shelf preview. A separate Share → IPMsg Dock target receives actual file shares from other Android apps after the session is approved. Text/URL shares are labeled and do not invent original files.
+
+Edge handoff is experimental: it opens a narrow native Activity, requiring a source app/device that supports native cross-app drags/multi-window. Drop there, then use the PC shelf. It needs no overlay/accessibility service. Share is the reliable fallback when the edge cannot be kept alongside another app.
+
+Up to 30 individual files. Known-size providers are read directly after metadata and access checks; unknown-size or virtual files can require a bounded private copy. Background thumbnails do not require an upfront full copy of every file. Metadata checks do not prove immutable or authenticated content. Cloud-only files can require their source provider's internet access; choose offline local files for offline transfers.
+
+The bridge listens only on loopback through the selected ADB tunnel, requires a random bearer per request, and ends on phone screen-off/lock, Stop, expiry or PC disconnect. It does not restart after process death. A new session needs explicit consent; old delayed callbacks cannot revoke a replacement session. ADB entry Activities are shell/system gated; the public Share target cannot create sessions from intent tokens. The foreground notification has Stop. A session lasts at most one hour/15 minutes idle; opening the screen does not silently grant access.
+
+This is the Android file companion; Windows hover/window controls, screenshot clipboard, local Lucide icons, QR pairing and gaming profiles are described in the matching dock guide. They do not add an internet or account dependency to the Android app.
+
+The camera server also bounds admitted connections and pending handshake timeout jobs. Other chat/camera features are retained from 0.7.5. See TESTING.md for actual build/check status and pending physical acceptance.
+
+---
+
+# IPMsg for Android — 0.7.5 release candidate
+
+Native Kotlin / Jetpack Compose, Android 10+, package `app.lantern.lan`. Local network only, no accounts, cloud service or separate Windows companion. This is an independent, unofficial IP Messenger client. Physical-phone acceptance is pending; see TESTING.md.
+
+## 0.7.5 changes
+
+- Chat uses one message field, Attach and Send. Search, message details, nicknames and clearing are in the conversation menu. Files, photos/video, camera and clipboard share a grouped attachment sheet. Received and sent messages use distinct, spaced bubbles; technical metadata stays hidden until requested. Unencrypted messages keep a short visible warning.
+- Live camera has a Compose preview, compact Mic/Light/Quality/Chat controls, visible recording/countdown indicators and an always available Stop. Chat opens below a smaller preview while keeping the same camera, HTTPS link and session. It supports text, copy and quote; file actions remain in the main conversation. Camera drafts are kept locally and safely restored without overwriting another draft.
+- Optional sound sends this phone's microphone to the selected receiver over the existing authenticated HTTPS session. Every camera session starts with the microphone off. The owner must confirm that the receiver can hear and record, then grant Android microphone permission. The receiver separately turns Sound on. Receiver controls cannot enable the phone microphone.
+- Muting clears buffered audio and ends its stream. Leaving the camera, backgrounding/locking, expiry, network change or revocation stops capture. Recorded WebM clips can include sound only while the phone microphone and receiver Sound are both on. Captures and recordings still download only to the receiver.
+
+## Previous 0.7.4 changes
+
+- Offline hotspot discovery no longer depends on a general broadcast or an Internet default route. Discovery tries each local subnet and saved address independently. Per-interface UDP sockets keep port 2425; file download sockets select the directly attached LAN. A changed LAN binding refreshes discovery, and My IP excludes cellular interfaces.
+- Live camera adds an owner-controlled flashlight on supported cameras. It switches off when the camera closes. Changing mobile data does not end a session when its LAN binding remains unchanged; an actual LAN change ends access.
+- Nearby has compact actions, readable connection guidance and Listening/Paused status. Conversation cards and settings have clearer grouping and spacing. Technical error details are available on demand.
+- Security options now explain their scope. Encrypted messages only rejects plaintext messages in both directions, including file offers. Require encrypted files controls Windows downloads of files sent by this phone; it does not control incoming file bodies. Unsupported encrypted-file offers fail before sharing; an unencrypted Windows request is shown on the transfer with a Security settings shortcut. Existing settings and approvals are preserved; the app never silently relaxes them.
+
+## Previous 0.7.3 change
+
+The live camera image now fills the receiver's entire available viewing area edge to edge. Its original proportions are preserved, with excess edges cropped from the center to match the receiver's screen ratio. The browser does not enter full-screen mode. Exit wide view returns to the uncropped fit view. No tests were run, as requested.
+
+## Previous 0.7.2 changes
+
+- The live link opens in a wide camera-only layout inside the browser window. Video fills the available window, with overlaid controls. Wide view does not put the browser into full screen. Exit wide view or Escape returns to the regular page layout; camera images retain their orientation without stretching; wide view crops excess edges to match the receiver’s aspect ratio.
+- Manage storage now appears in Settings → Storage, with no storage shortcut in the Settings header.
+- Compile-only update; no runtime tests were run, as requested.
+
+## Previous 0.7.1 changes
+
+- Conversation rows are separate, spaced cards. Settings controls are grouped into distinct section cards.
+- Nearby → Manage contains device approval, nicknames, favorites, blocking and restoration. The Devices section has been removed from Settings.
+- Home-screen widgets have been removed, including the provider and resources.
+- The camera preview has link/setup, one Quality button and Stop camera. Tap Quality to reveal a live 10–100% slider. Percentages scale output width/height and JPEG compression. 100% uses the largest common YUV/preview output advertised by the selected rear camera; this is native stream resolution, not the camera's full-resolution still-photo mode. Larger streams can reduce frame rate and increase bandwidth/heat. No throughput improvement is claimed.
+- Quality changes keep the current HTTPS link and session. Low percentages sample directly into smaller output buffers before encoding.
+- Windows viewing has Wide view within the browser window. Capture photo downloads a JPEG directly to the receiver. Record and Stop recording create a silent WebM in the receiver's browser and trigger its download. No new recording/photo is saved on the sender. The sender receives activity notifications and an on-screen recording indicator. Existing saved files are retained.
+- Browser recording clips stop and download after five minutes to bound memory. Stop and wait for the download before closing the page. Browser download permissions/settings apply. Changing stream quality during a recording keeps that clip's initial canvas dimensions; start a new clip to record at a new native size.
+
+Version 0.7.1 was compile-only at the user's request. Its physical-phone and browser acceptance remains pending.
+
+## Install and connect
+
+1. Install the supplied release-candidate APK over the existing IPMsg/Lantern app. Do not uninstall if you want to retain history and identity. Android may ask you to allow installation from your file manager. The release uses a private key with a verified rotation lineage from the earlier signing certificate.
+2. Connect Windows and the phone to the same router, or connect Windows to the phone's hotspot. Internet and mobile data are not required. After changing hotspots/networks, use the PC's current IPv4 address from `ipconfig`; a saved address may belong to the previous network. Guest Wi-Fi/client isolation or a VPN can prevent discovery.
+3. In Windows Firewall, allow IP Messenger on your private network: UDP 2425 for discovery/messages and TCP 2425 for file downloads. Keep the Windows application running. Stop listening in any separate IPMsg Mobile app using the same port.
+4. Open IPMsg, allow notifications, then Start listening. Refresh Nearby or add the PC's IPv4 address from `ipconfig`. Settings shows My IP and a compact troubleshooting panel.
+5. Approve a recipient before sending. Compare public-key fingerprints through a trusted channel. A secure device's approval follows its verified key across addresses; changed keys need reapproval. Legacy devices remain address-scoped and require explicit plaintext consent. Never reset a key merely to dismiss a warning.
+6. Accept incoming files in their source chat. Completed downloads default to Downloads/IPMsg. Change folder in Settings → Storage. If folder access is revoked, select the folder again. Open and Folder actions depend on installed Android apps/providers. Duplicate names never intentionally overwrite an existing file.
+
+### Why the security switches can block screenshots
+
+Screenshots are ordinary files in IPMsg. A Windows peer can support encrypted messages while requesting unencrypted file bytes. With **Require encrypted files** enabled, that download is refused. Update Windows IP Messenger and check its encryption support/settings first. If you deliberately choose compatibility, turning this switch off permits unencrypted Windows downloads; encrypted requests still use encryption. It does not guarantee a particular peer will request encryption. Keep strict mode on when unencrypted file contents are unacceptable. Neither switch detects screenshots or filters file extensions.
+
+**Encrypted messages only** rejects incoming plaintext messages and file offers, and blocks sending when compatible message encryption is unavailable. With it off, encryption is still used when available; outgoing plaintext needs confirmation. A previously approved secure identity cannot silently downgrade to plaintext. Files received have their own plaintext acceptance prompt. Live camera always uses HTTPS.
+
+## Everyday use
+
+- Four tabs remain: Nearby, Chats, Files and Settings. Favorite devices and private local nicknames help identify recipients.
+- Android's Share menu accepts text, links and up to 30 individual files. Review recipient, count and size before sharing. Folder transfers are excluded.
+- Attach offers files, photos/video and ordinary camera capture. Send clipboard reads it only after your tap and shows a preview; there is no clipboard monitoring.
+- Long-press a message for Copy, Quote reply, Delete locally or Resend. Quotes are ordinary Windows-compatible text. Database search includes older messages; conversations load older pages on demand.
+- Queue explicitly selected messages/files for an approved offline recipient. Review pending items when it returns; nothing sends automatically. Items expire after 24 hours. Temporary URI grants may require a private staged copy; unused copies are cleaned after 48 hours. Shared files must remain available and sharing requires renewed confirmation.
+- Reply and Mark read notification actions are available. Direct replies require a currently approved secure peer. Other replies open the app for review. Android notification and battery settings control heads-up/background behavior.
+- Listening is user-controlled and uses a persistent notification. It does not restart automatically after boot or process termination. Stop listening when finished.
+
+## Secure live camera
+
+Chat → Attach → Live camera requires owner approval and Android camera permission. Keep the camera screen open. The viewer uses HTTPS with a temporary certificate containing the phone's current LAN IP. The phone displays its SHA-256 certificate fingerprint and setup instructions.
+
+Tap **Light** on the phone to toggle its continuous flashlight while streaming. It is unavailable on cameras without a compatible flash. The viewer cannot control it. Leaving the screen, stopping the camera or a camera failure releases the flashlight. High stream quality plus flashlight may increase battery use and heat.
+
+On the selected Windows PC, inspect the site's certificate and compare the entire SHA-256 fingerprint with the phone. Only after a match, use a site-specific certificate exception if your browser permits it. Do not install a general-purpose phone CA or disable certificate checks globally. Reverify after address/certificate changes. If browser policy prevents setup, use ordinary photo/video sharing; there is no HTTP fallback.
+
+The one-use link authenticates a short-lived Secure/HttpOnly/SameSite session. Leaving the camera screen, locking, expiry, network change or revocation ends access. The initial sharing confirmation explicitly permits receiver recording and photo capture without another prompt. Camera activity notifications must be enabled before sharing; disabling them ends the session. A visible recording indicator/countdown and immediate Stop remain available. Receiver recordings are WebM files created and downloaded in its browser. Photo capture downloads a JPEG there. Neither creates a sender-side file or chat attachment. The app's Photo action notifies the phone. Independent Windows screenshots or third-party recording cannot be detected or prevented. Android controls notification banner visibility, sound and Do Not Disturb behavior.
+
+### Chat and sound while sharing
+
+Tap **Chat** on the camera screen to show the same conversation below a smaller preview. Text messages continue through ordinary IPMsg with the same device approval and encryption rules. Close Chat to enlarge the view; this keeps the camera and link active. Open files and attachments from the main conversation after stopping the camera.
+
+Tap **Mic off** on the phone, read the hear-and-record confirmation, and allow Android microphone access. Then click **Sound off** in the Windows viewer to listen. If Android finishes the first permission prompt before the activity regains focus, tap Mic again. Every new session starts muted; saved permission does not automatically share sound. The phone owner can turn Mic off at any time. The receiver's Sound switch controls listening and the recording's sound, and never activates the phone microphone.
+
+Audio is voice-oriented mono 16 kHz. It is streamed with a small bounded buffer over HTTPS and is never saved on the phone. Sound changes apply during a recording: an otherwise silent audio track carries the microphone only while both sides enable sound. Receiver mute or backgrounding the browser tab clears playback. Clips stop after five minutes or approximately 96 MiB, then download in the receiver's browser. Stop and wait for the download before leaving. Actual audio latency, A/V synchronization and device/browser behavior require physical acceptance; no performance measurement is claimed.
+
+## Reliability and limits
+
+Transfer cards show percentage, measured speed and estimated remaining time. Retryable outgoing offers remain available until success, cancellation or their existing expiry. Restarting a download begins at zero; cross-process resume is not supported. Offers are session-bound and expire after one hour. Active transfers use a bounded wake lock. Pending destinations are tracked, checked before publication and cleaned after interruption where the provider allows.
+
+Classic IPMsg encryption remains compatible: RSA/AES messaging with negotiated signatures, and legacy AES-CTR file bodies. Classic encrypted file bytes lack authentication; the app does not claim tamper-proof file contents. No incompatible pairing commands or read receipts are introduced. Acknowledged means delivered to the peer app, not read by a person.
+
+History is app-private SQLite, not separately encrypted; device encryption follows Android settings. Backup is disabled. Clear history removes message/file records, not files already saved in public storage. Moved/deleted files and revoked provider grants can invalidate chat links. Messages are limited to 6,000 UTF-8 bytes; use a file for longer text. IPv4, individual files and Windows-compatible text are supported; folders, internet messaging, Member Master and remote storage browsing remain out of scope.
+
+## Build
+
+Requires JDK 17 and Android SDK 35. Set ANDROID_HOME or an untracked local.properties. Run:
+
+```powershell
+.\gradlew.bat :app:assembleRelease
+```
+
+Release shrinking is enabled. The release task produces an unsigned APK; distribution signing occurs outside this source tree. Private keys/passwords and local data are excluded. Your own unrelated key cannot update this distributed app. Gradle 8.11.1, AGP 8.9.1, Kotlin 2.1.20, Compose BOM 2025.04.01. Bouncy Castle supplies certificate encoding/signing support; Android Keystore protects the camera private key.
+
+Protocol/source references: https://github.com/shirouzu/ipmsg/blob/master/protocol.txt and https://github.com/shirouzu/ipmsg (older Windows source). See LICENSE and THIRD_PARTY_NOTICES.md. Historical reports under docs describe earlier versions, not current acceptance.

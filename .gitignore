@@ -1,0 +1,21 @@
+# Build output and local state
+**/build/
+**/.gradle/
+**/.kotlin/
+**/local.properties
+**/.idea/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.part
+
+# Private signing material
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.pem
+*.key
+*.pass
+ipmsg-signing-lineage.bin
